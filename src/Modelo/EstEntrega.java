@@ -1,0 +1,26 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Modelo;
+
+/**
+ *
+ * @author Ariel May
+ */
+public class EstEntrega implements EstadosCafeteria{
+
+    @Override
+    public void siguiente(CafeteriaFSM fsm) {
+        System.out.println("Estado seleccion:");
+        fsm.setEstadoActual(new EstSeleccionProductos());
+    }
+
+    @Override
+    public void error(CafeteriaFSM fsm) {
+        System.out.println("No hay Cambio");
+        fsm.setEstadoActual(new EstSinCambio());
+    }
+    
+}
