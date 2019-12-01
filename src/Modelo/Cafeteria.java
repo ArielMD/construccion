@@ -32,6 +32,13 @@ public class Cafeteria {
         maquina.getPreparando().setEnabled(false);
         maquina.getEntrega().setEnabled(false);
         maquina.getJbtNuevaCompra().setVisible(false);
+        maquina.getJbtUno().setEnabled(true);
+        maquina.getJbtCinco().setEnabled(true);
+        maquina.getJbtDiez().setEnabled(true);
+        maquina.getJbtVeinte().setEnabled(true);
+        maquina.getJbtCincuenta().setEnabled(true);
+        maquina.getjbtRellenarIng().setVisible(false);
+        maquina.getError().setVisible(false);
     }
     
     public void seleccionIngredientes(){
@@ -56,10 +63,17 @@ public class Cafeteria {
     public void entrega(){
         maquina.getEntrega().setEnabled(true);
         maquina.getJbtNuevaCompra().setVisible(true);
+        maquina.getJbtUno().setEnabled(false);
+        maquina.getJbtCinco().setEnabled(false);
+        maquina.getJbtDiez().setEnabled(false);
+        maquina.getJbtVeinte().setEnabled(false);
+        maquina.getJbtCincuenta().setEnabled(false);
     }
     
     public void SinIngredientes(){
-        
+        maquina.getjbtRellenarIng().setVisible(true);
+        maquina.getError().setVisible(true);
+        maquina.getJbtNuevaCompra().setVisible(false);
     }
     
     public void SinCambio(){

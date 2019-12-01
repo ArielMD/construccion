@@ -20,8 +20,9 @@ public class EstEntrega implements EstadosCafeteria{
 
     @Override
     public void error(CafeteriaFSM fsm) {
-        System.out.println("No hay Cambio");
-        fsm.setEstadoActual(new EstSinCambio());
+        System.out.println("Estado sin ingredientes");
+        fsm.device.SinIngredientes();
+        fsm.setEstadoActual(new EstSinIngredientes());
     }
     
 }
