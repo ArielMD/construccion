@@ -34,6 +34,7 @@ public class Principal {
                 Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
             }
         }, executor);
+        executor.shutdown();
     }
 
 }
