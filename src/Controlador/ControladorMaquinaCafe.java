@@ -18,6 +18,8 @@ import java.util.Date;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
 /**
@@ -46,6 +48,15 @@ public class ControladorMaquinaCafe implements ActionListener{
         this.maquina.getLeche().addActionListener(this);
         this.maquina.getAzucar().addActionListener(this);
         this.maquina.getJbtNuevaCompra().addActionListener(this);
+        this.maquina.getjbtRellenarIng().addActionListener(this);
+        
+        
+        JMenu Ayuda = new JMenu("Ayuda");
+        JMenuItem bloquear = new JMenuItem("Bloquear Maquina");
+        bloquear.addActionListener(this);
+        Ayuda.add(bloquear);
+        this.maquina.getMenu().add(Ayuda);
+        
         
         Cafeteria cafe = new Cafeteria(maquina);
         this.fsm = new CafeteriaFSM(cafe);
@@ -114,8 +125,21 @@ public class ControladorMaquinaCafe implements ActionListener{
             this.fsm.siguiente();
         } 
         if (this.maquina.getJbtNuevaCompra() == e.getSource()) {
+            boolean conIngredientes = this.cliente.getNivelAzucar() > 0
+                    && this.cliente.getNivelCafe() > 0
+                    && this.cliente.getNivelLeche() > 0;
+            if (conIngredientes) {
+                this.fsm.siguiente();
+            } else {
+                this.fsm.error();
+            }
+        }
+        if (this.maquina.getjbtRellenarIng() == e.getSource()) {
+            this.cliente.rellenarIngredientes();
+            this.llenarIngredientes();
             this.fsm.siguiente();
         }
+
         if (this.maquina.getJbtAceptar() == e.getSource()) {
 
             try {
@@ -130,11 +154,19 @@ public class ControladorMaquinaCafe implements ActionListener{
                 this.fReader.escribirArchivo(bitacora, "Bitacora");
 
                 JOptionPane.showMessageDialog(null, "Gracias por su compra");
+                 //Aqui va los metodos para dar cambio y agregar el dinero al monedero.
+                this.monedero.iniciarDineroIngresado();
+                this.maquina.getDineroIngresado().setText(monedero.getIngresado().toString());
+                this.maquina.getPrecio().setText("0");
             } catch (IOException ex) {
                 Logger.getLogger(ControladorMaquinaCafe.class.getName()).log(Level.SEVERE, null, ex);
             } catch (InterruptedException ex) {
                 Logger.getLogger(ControladorMaquinaCafe.class.getName()).log(Level.SEVERE, null, ex);
             }
+        }
+        
+        if(this.maquina.getMenu().getMenu(0).getItem(0) == e.getSource()){
+            this.fsm.error();
         }
     }
     

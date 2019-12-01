@@ -14,6 +14,7 @@ public class EstSinIngredientes implements EstadosCafeteria{
     @Override
     public void siguiente(CafeteriaFSM fsm) {
         System.out.println("Return inicio");
+        fsm.device.seleccionProductos();
         fsm.setEstadoActual(new EstSeleccionProductos());
     }
 

@@ -18,13 +18,15 @@ public class Monedero {
     private int monedaCincuenta = 0;
     
     //Dinero que ingreso el cliente
-    private int uno = 0;
-    private int cinco = 0;
-    private int diez = 0;
-    private int veinte = 0;
-    private int cincuenta = 0;
+    private int uno;
+    private int cinco;
+    private int diez;
+    private int veinte;
+    private int cincuenta;
 
+    
     public Monedero() {
+        iniciarDineroIngresado();
     }
 
     public void ingresarUno() {
@@ -51,4 +53,11 @@ public class Monedero {
         return uno + cinco*5 + diez*10 + veinte*20 + cincuenta*50;
     }
     
+    public void iniciarDineroIngresado(){
+        uno = 0;
+        cinco = 0;
+        diez = 0;
+        veinte = 0;
+        cincuenta = 0;
+    }
 }

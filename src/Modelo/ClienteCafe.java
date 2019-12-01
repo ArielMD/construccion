@@ -62,5 +62,10 @@ public class ClienteCafe {
     public void cucharadaAzucar() {
         nivelAzucar -= cucharada;
     }
-        
+
+    public void rellenarIngredientes() {
+        this.nivelCafe = 100;
+        this.nivelLeche = 100;
+        this.nivelAzucar = 100;
+    }
 }
