@@ -11,10 +11,14 @@ import Modelo.ClienteCafe;
 import Modelo.FReader;
 import Modelo.Monedero;
 import Vista.MaquinaCafe;
+import completablefuture.Principal;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.Date;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,14 +30,14 @@ import javax.swing.JOptionPane;
  *
  * @author Ariel May
  */
-public class ControladorMaquinaCafe implements ActionListener{
-    
+public class ControladorMaquinaCafe implements ActionListener {
+
     private MaquinaCafe maquina;
     private Monedero monedero;
     private CafeteriaFSM fsm;
     private ClienteCafe cliente;
     private FReader fReader;
-    
+
     public ControladorMaquinaCafe(MaquinaCafe maquina) throws IOException {
         this.maquina = maquina;
         this.maquina.getJbtUno().addActionListener(this);
@@ -49,15 +53,13 @@ public class ControladorMaquinaCafe implements ActionListener{
         this.maquina.getAzucar().addActionListener(this);
         this.maquina.getJbtNuevaCompra().addActionListener(this);
         this.maquina.getjbtRellenarIng().addActionListener(this);
-        
-        
+
         JMenu Ayuda = new JMenu("Ayuda");
         JMenuItem bloquear = new JMenuItem("Bloquear Maquina");
         bloquear.addActionListener(this);
         Ayuda.add(bloquear);
         this.maquina.getMenu().add(Ayuda);
-        
-        
+
         Cafeteria cafe = new Cafeteria(maquina);
         this.fsm = new CafeteriaFSM(cafe);
         this.monedero = new Monedero();
@@ -65,32 +67,32 @@ public class ControladorMaquinaCafe implements ActionListener{
         this.fReader = new FReader();
         this.llenarIngredientes();
         fReader.crearArchivo("Bitacora");
-        
+
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(this.maquina.getJbtUno() == e.getSource()){
+        if (this.maquina.getJbtUno() == e.getSource()) {
             monedero.ingresarUno();
             this.maquina.getDineroIngresado().setText(monedero.getIngresado().toString());
             activarProductos();
         }
-        if(this.maquina.getJbtCinco() == e.getSource()){
+        if (this.maquina.getJbtCinco() == e.getSource()) {
             monedero.ingresarCinco();
             this.maquina.getDineroIngresado().setText(monedero.getIngresado().toString());
             activarProductos();
         }
-        if(this.maquina.getJbtDiez() == e.getSource()){
+        if (this.maquina.getJbtDiez() == e.getSource()) {
             monedero.ingresarDiez();
             this.maquina.getDineroIngresado().setText(monedero.getIngresado().toString());
             activarProductos();
         }
-        if(this.maquina.getJbtVeinte() == e.getSource()){
+        if (this.maquina.getJbtVeinte() == e.getSource()) {
             monedero.ingresarVeinte();
             this.maquina.getDineroIngresado().setText(monedero.getIngresado().toString());
             activarProductos();
         }
-        if(this.maquina.getJbtCincuenta() == e.getSource()){
+        if (this.maquina.getJbtCincuenta() == e.getSource()) {
             monedero.ingresarCincuenta();
             this.maquina.getDineroIngresado().setText(monedero.getIngresado().toString());
             activarProductos();
@@ -110,20 +112,20 @@ public class ControladorMaquinaCafe implements ActionListener{
             this.maquina.getPbarCafe().setValue(this.cliente.getNivelCafe());
             this.fsm.siguiente();
         }
-        if(this.maquina.getTgbDescafeinado() == e.getSource()){
+        if (this.maquina.getTgbDescafeinado() == e.getSource()) {
             this.maquina.getPedido().setText("Café Descafeinado");
             this.maquina.getPrecio().setText(String.valueOf(cliente.precioCafeDescafeinado()));
             this.cliente.cucharadaCafe();
             this.maquina.getPbarCafe().setValue(this.cliente.getNivelCafe());
             this.fsm.siguiente();
         }
-        if(this.maquina.getTgbCapuccino() == e.getSource()){
+        if (this.maquina.getTgbCapuccino() == e.getSource()) {
             this.maquina.getPedido().setText("Café Capuccino");
             this.maquina.getPrecio().setText(String.valueOf(cliente.precioCafeCapuccino()));
             this.cliente.cucharadaCafe();
             this.maquina.getPbarCafe().setValue(this.cliente.getNivelCafe());
             this.fsm.siguiente();
-        } 
+        }
         if (this.maquina.getJbtNuevaCompra() == e.getSource()) {
             boolean conIngredientes = this.cliente.getNivelAzucar() > 0
                     && this.cliente.getNivelCafe() > 0
@@ -142,19 +144,21 @@ public class ControladorMaquinaCafe implements ActionListener{
 
         if (this.maquina.getJbtAceptar() == e.getSource()) {
 
+            orden();
+            /*
             try {
 
                 this.fsm.siguiente();
                 TimeUnit.SECONDS.sleep(3);
 
                 this.fsm.siguiente();
-                String bitacora = new Date().toString()+" "+
-                                  this.maquina.getPedido().getText()+" $"+
-                                  this.maquina.getPrecio().getText()+"\n";
+                String bitacora = new Date().toString() + " "
+                        + this.maquina.getPedido().getText() + " $"
+                        + this.maquina.getPrecio().getText() + "\n";
                 this.fReader.escribirArchivo(bitacora, "Bitacora");
 
                 JOptionPane.showMessageDialog(null, "Gracias por su compra");
-                 //Aqui va los metodos para dar cambio y agregar el dinero al monedero.
+                //Aqui va los metodos para dar cambio y agregar el dinero al monedero.
                 this.monedero.iniciarDineroIngresado();
                 this.maquina.getDineroIngresado().setText(monedero.getIngresado().toString());
                 this.maquina.getPrecio().setText("0");
@@ -163,31 +167,96 @@ public class ControladorMaquinaCafe implements ActionListener{
             } catch (InterruptedException ex) {
                 Logger.getLogger(ControladorMaquinaCafe.class.getName()).log(Level.SEVERE, null, ex);
             }
+            */
         }
-        
-        if(this.maquina.getMenu().getMenu(0).getItem(0) == e.getSource()){
+
+        if (this.maquina.getMenu().getMenu(0).getItem(0) == e.getSource()) {
             this.fsm.error();
         }
     }
-    
-    public void activarProductos(){
-        
-        if(cliente.precioCafeNegro()<= monedero.getIngresado()){
+
+    public void activarProductos() {
+
+        if (cliente.precioCafeNegro() <= monedero.getIngresado()) {
             this.maquina.getTgbNegro().setEnabled(true);
         }
-        if(cliente.precioCafeCapuccino()<= monedero.getIngresado()){
+        if (cliente.precioCafeCapuccino() <= monedero.getIngresado()) {
             this.maquina.getTgbCapuccino().setEnabled(true);
         }
-        if(cliente.precioCafeDescafeinado()<= monedero.getIngresado()){
+        if (cliente.precioCafeDescafeinado() <= monedero.getIngresado()) {
             this.maquina.getTgbDescafeinado().setEnabled(true);
         }
 
     }
-    
-    public void llenarIngredientes(){
+
+    public void llenarIngredientes() {
         this.maquina.getPbarCafe().setValue(100);
         this.maquina.getPbarAzucar().setValue(100);
         this.maquina.getPbarLeche().setValue(100);
     }
-    
+
+    public void orden() {
+
+        ExecutorService executor = Executors.newFixedThreadPool(2);
+        CompletableFuture<Void> preparacion = CompletableFuture.runAsync(() -> {
+            try {
+                System.out.println("Preparando cafe...(ES)");
+                this.fsm.siguiente();
+                Thread.sleep(2000);
+                System.out.println("Café terminado!(ES)");
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }, executor);
+
+        CompletableFuture<Void> orden = CompletableFuture.runAsync(() -> {
+            try {
+                System.out.println("Comenzando orden...(ES)");
+                Thread.sleep(4000);
+                this.fsm.siguiente();
+                String bitacora = new Date().toString() + " "
+                        + this.maquina.getPedido().getText() + " $"
+                        + this.maquina.getPrecio().getText() + "\n";
+                try {
+                    this.fReader.escribirArchivo(bitacora, "Bitacora");
+                } catch (IOException ex) {
+                    Logger.getLogger(ControladorMaquinaCafe.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                JOptionPane.showMessageDialog(null, "Gracias por su compra");
+                //Aqui va los metodos para dar cambio y agregar el dinero al monedero.
+                this.monedero.iniciarDineroIngresado();
+                this.maquina.getDineroIngresado().setText(monedero.getIngresado().toString());
+                this.maquina.getPrecio().setText("0");
+                System.out.println("Orden terminada!(ES)");
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }, executor);
+
+        /*
+        try {
+
+            this.fsm.siguiente();
+            TimeUnit.SECONDS.sleep(3);
+
+            this.fsm.siguiente();
+            String bitacora = new Date().toString() + " "
+                    + this.maquina.getPedido().getText() + " $"
+                    + this.maquina.getPrecio().getText() + "\n";
+            this.fReader.escribirArchivo(bitacora, "Bitacora");
+
+            JOptionPane.showMessageDialog(null, "Gracias por su compra");
+            //Aqui va los metodos para dar cambio y agregar el dinero al monedero.
+            this.monedero.iniciarDineroIngresado();
+            this.maquina.getDineroIngresado().setText(monedero.getIngresado().toString());
+            this.maquina.getPrecio().setText("0");
+        } catch (IOException ex) {
+            Logger.getLogger(ControladorMaquinaCafe.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(ControladorMaquinaCafe.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        */
+    }
 }
