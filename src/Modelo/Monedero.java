@@ -9,11 +9,7 @@ package Modelo;
  *
  * @author Ariel May
  */
-public class Cliente {
-    private int cafeNegro = 35;
-    private int cafeCapuccino = 45;
-    private int cafeDescafeinado = 30;
-    
+public class Monedero {
     //Dinero dentro de la maquina
     private int monedaUno = 0;
     private int monedaCinco = 0;
@@ -28,7 +24,7 @@ public class Cliente {
     private int veinte = 0;
     private int cincuenta = 0;
 
-    public Cliente() {
+    public Monedero() {
     }
 
     public void ingresarUno() {
@@ -54,18 +50,5 @@ public class Cliente {
     public Integer getIngresado(){
         return uno + cinco*5 + diez*10 + veinte*20 + cincuenta*50;
     }
-
-    public int precioCafeNegro() {
-        return cafeNegro;
-    }
-
-    public int precioCafeCapuccino() {
-        return cafeCapuccino;
-    }
-
-    public int precioCafeDescafeinado() {
-        return cafeDescafeinado;
-    }
-    
     
 }

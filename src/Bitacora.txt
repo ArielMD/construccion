@@ -1,0 +1,4 @@
+Sat Nov 30 22:17:51 CST 2019 Café Descafeinado $30
+Sat Nov 30 22:19:33 CST 2019 Café Descafeinado $30
+Sat Nov 30 22:20:38 CST 2019 Café Capuccino $45
+Sat Nov 30 22:20:55 CST 2019 Café Descafeinado $30

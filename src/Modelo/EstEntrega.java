@@ -14,6 +14,7 @@ public class EstEntrega implements EstadosCafeteria{
     @Override
     public void siguiente(CafeteriaFSM fsm) {
         System.out.println("Estado seleccion:");
+        fsm.device.seleccionProductos();
         fsm.setEstadoActual(new EstSeleccionProductos());
     }
 

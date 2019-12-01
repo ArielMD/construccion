@@ -6,6 +6,8 @@
 package Modelo;
 
 import Vista.MaquinaCafe;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -25,11 +27,15 @@ public class Cafeteria {
         maquina.getTgbCapuccino().setEnabled(false);
         maquina.getTgbDescafeinado().setEnabled(false);
         maquina.getJbtAceptar().setVisible(false);
-        //maquina.getPedido().setEnable(false);
-        
+        maquina.getSelectProducto().setEnabled(true);
+        maquina.getSelectIngredientes().setEnabled(false);
+        maquina.getPreparando().setEnabled(false);
+        maquina.getEntrega().setEnabled(false);
+        maquina.getJbtNuevaCompra().setVisible(false);
     }
     
     public void seleccionIngredientes(){
+        maquina.getSelectIngredientes().setEnabled(true);
         maquina.getTgbNegro().setEnabled(false);
         maquina.getTgbCapuccino().setEnabled(false);
         maquina.getTgbDescafeinado().setEnabled(false);
@@ -39,12 +45,17 @@ public class Cafeteria {
         maquina.getJbtAceptar().setVisible(true);
     }
     
-    public void Preparacion(){
-        
+    public void preparacion() {
+        maquina.getPreparando().setEnabled(true);
+        maquina.getJbtAceptar().setVisible(false);
+        maquina.getAzucar().setEnabled(false);
+        maquina.getLeche().setEnabled(false);
+
     }
     
-    public void Entrega(){
-        
+    public void entrega(){
+        maquina.getEntrega().setEnabled(true);
+        maquina.getJbtNuevaCompra().setVisible(true);
     }
     
     public void SinIngredientes(){

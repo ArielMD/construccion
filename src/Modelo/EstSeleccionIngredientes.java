@@ -15,6 +15,7 @@ public class EstSeleccionIngredientes implements EstadosCafeteria{
     public void siguiente(CafeteriaFSM fsm) {
         System.out.println("Estado preparacion:");
         fsm.setEstadoActual(new EstPreparacion());
+        fsm.device.preparacion();
     }
 
     @Override
