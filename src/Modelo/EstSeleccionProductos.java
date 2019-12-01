@@ -22,6 +22,7 @@ public class EstSeleccionProductos implements EstadosCafeteria{
     @Override
     public void error(CafeteriaFSM fsm) {
         System.out.println("bloqueado");
+        fsm.device.bloqueado();
         fsm.setEstadoActual(new EstBloqueado());
     }
 

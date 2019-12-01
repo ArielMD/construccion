@@ -31,11 +31,14 @@
         <Property name="text" type="java.lang.String" value="jLabel21"/>
       </Properties>
     </Component>
+    <Menu class="javax.swing.JMenuBar" name="menu">
+    </Menu>
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
   </Properties>
   <SyntheticProperties>
+    <SyntheticProperty name="menuBar" type="java.lang.String" value="menu"/>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
     <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
   </SyntheticProperties>
@@ -609,7 +612,7 @@
                       <Component id="jbtDiez" alignment="0" min="-2" pref="65" max="-2" attributes="0"/>
                       <Component id="jbtUno" alignment="1" min="-2" pref="65" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="76" max="32767" attributes="0"/>
+                  <EmptySpace pref="74" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>

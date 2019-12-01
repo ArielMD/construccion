@@ -12,6 +12,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JMenuBar;
 import javax.swing.JProgressBar;
 import javax.swing.JTextField;
 import javax.swing.JToggleButton;
@@ -130,6 +131,10 @@ public class MaquinaCafe extends javax.swing.JFrame {
 
     public JButton getJbtNuevaCompra() {
         return jbtNuevaCompra;
+    }
+
+    public JMenuBar getMenu() {
+        return menu;
     }
     
     
@@ -282,6 +287,7 @@ public class MaquinaCafe extends javax.swing.JFrame {
         jbtCinco = new javax.swing.JButton();
         jbtDiez = new javax.swing.JButton();
         jbtUno = new javax.swing.JButton();
+        menu = new javax.swing.JMenuBar();
 
         jLabel3.setText("Nivel de Café");
 
@@ -625,8 +631,10 @@ public class MaquinaCafe extends javax.swing.JFrame {
                     .addComponent(jbtCinco, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbtDiez, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbtUno, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(76, Short.MAX_VALUE))
+                .addContainerGap(74, Short.MAX_VALUE))
         );
+
+        setJMenuBar(menu);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -734,6 +742,7 @@ public class MaquinaCafe extends javax.swing.JFrame {
     private javax.swing.JButton jbtUno;
     private javax.swing.JButton jbtVeinte;
     private javax.swing.JButton leche;
+    private javax.swing.JMenuBar menu;
     private javax.swing.JProgressBar pbarAzucar;
     private javax.swing.JProgressBar pbarCafe;
     private javax.swing.JProgressBar pbarLeche;

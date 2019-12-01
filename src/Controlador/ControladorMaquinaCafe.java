@@ -18,6 +18,8 @@ import java.util.Date;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
 /**
@@ -47,6 +49,14 @@ public class ControladorMaquinaCafe implements ActionListener{
         this.maquina.getAzucar().addActionListener(this);
         this.maquina.getJbtNuevaCompra().addActionListener(this);
         this.maquina.getjbtRellenarIng().addActionListener(this);
+        
+        
+        JMenu Ayuda = new JMenu("Ayuda");
+        JMenuItem bloquear = new JMenuItem("Bloquear Maquina");
+        bloquear.addActionListener(this);
+        Ayuda.add(bloquear);
+        this.maquina.getMenu().add(Ayuda);
+        
         
         Cafeteria cafe = new Cafeteria(maquina);
         this.fsm = new CafeteriaFSM(cafe);
@@ -153,6 +163,10 @@ public class ControladorMaquinaCafe implements ActionListener{
             } catch (InterruptedException ex) {
                 Logger.getLogger(ControladorMaquinaCafe.class.getName()).log(Level.SEVERE, null, ex);
             }
+        }
+        
+        if(this.maquina.getMenu().getMenu(0).getItem(0) == e.getSource()){
+            this.fsm.error();
         }
     }
     
