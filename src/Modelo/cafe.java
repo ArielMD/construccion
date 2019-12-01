@@ -5,6 +5,7 @@
  */
 package Modelo;
 
+import Controlador.ControladorMaquinaCafe;
 import Vista.MaquinaCafe;
 
 /**
@@ -17,20 +18,8 @@ public class cafe {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws InterruptedException {
-        Cafeteria cafe = new Cafeteria(new MaquinaCafe());
-        CafeteriaFSM fsm = new CafeteriaFSM(cafe);
-        System.out.println(fsm.getEstado());
-        Thread.sleep(5000);
-        fsm.siguiente();
-        System.out.println(fsm.getEstado());
-        fsm.siguiente();
-        System.out.println(fsm.getEstado());
-        fsm.siguiente();
-        System.out.println(fsm.getEstado());
-        fsm.error();
-        System.out.println(fsm.getEstado());
-        fsm.siguiente();
-        System.out.println(fsm.getEstado());
+        MaquinaCafe maquinaCafe = new MaquinaCafe();
+        ControladorMaquinaCafe controlador = new ControladorMaquinaCafe(maquinaCafe);
     }
     
 }

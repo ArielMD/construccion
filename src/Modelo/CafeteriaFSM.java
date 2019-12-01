@@ -13,7 +13,7 @@ public class CafeteriaFSM {
     private static  EstadosCafeteria estadoActual = new EstSeleccionProductos();
     static  Cafeteria device;
 
-    CafeteriaFSM(Cafeteria cafeteria) {
+    public CafeteriaFSM(Cafeteria cafeteria) {
         device = cafeteria;
         device.seleccionProductos();
     }

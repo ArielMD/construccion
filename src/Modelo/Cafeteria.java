@@ -24,15 +24,19 @@ public class Cafeteria {
         maquina.getTgbNegro().setEnabled(false);
         maquina.getTgbCapuccino().setEnabled(false);
         maquina.getTgbDescafeinado().setEnabled(false);
+        maquina.getJbtAceptar().setVisible(false);
         //maquina.getPedido().setEnable(false);
         
     }
     
     public void seleccionIngredientes(){
-        //maquina.getPedido().setEnable("true");
+        maquina.getTgbNegro().setEnabled(false);
+        maquina.getTgbCapuccino().setEnabled(false);
+        maquina.getTgbDescafeinado().setEnabled(false);
+        maquina.getPedido().setEnabled(true);
         maquina.getAzucar().setEnabled(true);
         maquina.getLeche().setEnabled(true);
-        //maquina.getAceptar().setEnable(true);
+        maquina.getJbtAceptar().setVisible(true);
     }
     
     public void Preparacion(){
