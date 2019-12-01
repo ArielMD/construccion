@@ -25,7 +25,7 @@ public class Principal {
             try {
                 Thread.sleep(2000);
             } catch (InterruptedException ex) {
-                Logger.getLogger(asincrono.Principal.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
             }
             System.out.println("Café terminado");
         }, executor);
@@ -35,7 +35,7 @@ public class Principal {
             try {
                 Thread.sleep(4000);
             } catch (InterruptedException ex) {
-                Logger.getLogger(asincrono.Principal.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
             }
             System.out.println("Orden Lista!");
         }, executor);
