@@ -15,11 +15,14 @@ import completablefuture.Principal;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JMenu;
@@ -37,6 +40,8 @@ public class ControladorMaquinaCafe implements ActionListener {
     private CafeteriaFSM fsm;
     private ClienteCafe cliente;
     private FReader fReader;
+    private List<Integer> denominaciones;
+    private int almacen;
 
     public ControladorMaquinaCafe(MaquinaCafe maquina) throws IOException {
         this.maquina = maquina;
@@ -68,6 +73,9 @@ public class ControladorMaquinaCafe implements ActionListener {
         this.llenarIngredientes();
         fReader.crearArchivo("Bitacora");
 
+        denominaciones = Arrays.asList(50, 20, 10, 5, 1);
+
+        almacen = 100;
     }
 
     @Override
@@ -75,26 +83,36 @@ public class ControladorMaquinaCafe implements ActionListener {
         if (this.maquina.getJbtUno() == e.getSource()) {
             monedero.ingresarUno();
             this.maquina.getDineroIngresado().setText(monedero.getIngresado().toString());
+            //Actualizar almacen
+            //ingresado = Integer.parseInt(this.maquina.getDineroIngresado().getText());
             activarProductos();
         }
         if (this.maquina.getJbtCinco() == e.getSource()) {
             monedero.ingresarCinco();
             this.maquina.getDineroIngresado().setText(monedero.getIngresado().toString());
+            //Actualizar almacen
+            //ingresado = Integer.parseInt(this.maquina.getDineroIngresado().getText());
             activarProductos();
         }
         if (this.maquina.getJbtDiez() == e.getSource()) {
             monedero.ingresarDiez();
             this.maquina.getDineroIngresado().setText(monedero.getIngresado().toString());
+            //Actualizar almacen
+            //ingresado = Integer.parseInt(this.maquina.getDineroIngresado().getText());
             activarProductos();
         }
         if (this.maquina.getJbtVeinte() == e.getSource()) {
             monedero.ingresarVeinte();
             this.maquina.getDineroIngresado().setText(monedero.getIngresado().toString());
+            //Actualizar almacen
+            //ingresado = Integer.parseInt(this.maquina.getDineroIngresado().getText());
             activarProductos();
         }
         if (this.maquina.getJbtCincuenta() == e.getSource()) {
             monedero.ingresarCincuenta();
             this.maquina.getDineroIngresado().setText(monedero.getIngresado().toString());
+            //Actualizar almacen
+            //ingresado = Integer.parseInt(this.maquina.getDineroIngresado().getText());
             activarProductos();
         }
         if (this.maquina.getLeche() == e.getSource()) {
@@ -130,6 +148,8 @@ public class ControladorMaquinaCafe implements ActionListener {
             boolean conIngredientes = this.cliente.getNivelAzucar() > 0
                     && this.cliente.getNivelCafe() > 0
                     && this.cliente.getNivelLeche() > 0;
+            vaciarCampos();
+            iniciarIngresado();
             if (conIngredientes) {
                 this.fsm.siguiente();
             } else {
@@ -167,7 +187,7 @@ public class ControladorMaquinaCafe implements ActionListener {
             } catch (InterruptedException ex) {
                 Logger.getLogger(ControladorMaquinaCafe.class.getName()).log(Level.SEVERE, null, ex);
             }
-            */
+             */
         }
 
         if (this.maquina.getMenu().getMenu(0).getItem(0) == e.getSource()) {
@@ -225,9 +245,13 @@ public class ControladorMaquinaCafe implements ActionListener {
 
                 JOptionPane.showMessageDialog(null, "Gracias por su compra");
                 //Aqui va los metodos para dar cambio y agregar el dinero al monedero.
+                cambio();
+                /*
+                Es reemplazado en la funcion vaciar campos
                 this.monedero.iniciarDineroIngresado();
                 this.maquina.getDineroIngresado().setText(monedero.getIngresado().toString());
                 this.maquina.getPrecio().setText("0");
+                 */
                 System.out.println("Orden terminada!(ES)");
             } catch (InterruptedException ex) {
                 Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
@@ -257,6 +281,44 @@ public class ControladorMaquinaCafe implements ActionListener {
             Logger.getLogger(ControladorMaquinaCafe.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        */
+         */
+    }
+
+    public void cambio() {
+        int precio = Integer.parseInt(this.maquina.precio.getText());
+        int monto = Integer.parseInt(this.maquina.dineroIngresado.getText());
+        almacen += monto;
+        int cambio = monto - precio;
+        System.out.println("Precio:" + precio);
+        System.out.println("Monto" + monto);
+        System.out.println("Cambio" + cambio);
+        System.out.println("En almacen antes de dar cambio:" + almacen);
+        Map<String, Integer> monedas = new HashMap<String, Integer>();
+        int cambioaux = cambio;
+        if (almacen >= cambio) {
+            almacen -= cambio;
+            for (int deno : denominaciones) {
+                if (cambioaux >= deno) {
+                    monedas.put(String.valueOf(deno), cambioaux / deno);
+                    cambioaux %= deno;
+                }
+            }
+            System.out.println("Su cambio es:" + cambio + monedas);
+            System.out.println("Queda en el almacen:" + almacen);
+            this.maquina.cambio.setText(String.valueOf(cambio));
+        } else {
+            JOptionPane.showMessageDialog(null, "No hay dinero suficiente");
+        }
+
+    }
+
+    public void vaciarCampos() {
+        this.maquina.cambio.setText("0");
+        this.maquina.getDineroIngresado().setText("0");
+        this.maquina.getPrecio().setText("0");
+    }
+    
+    public void iniciarIngresado(){
+        this.monedero.iniciarDineroIngresado();
     }
 }
