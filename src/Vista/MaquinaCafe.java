@@ -700,8 +700,8 @@ public class MaquinaCafe extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton azucar;
     private javax.swing.JButton cafe;
-    private javax.swing.JTextField cambio;
-    private javax.swing.JTextField dineroIngresado;
+    public javax.swing.JTextField cambio;
+    public javax.swing.JTextField dineroIngresado;
     private javax.swing.JLabel entrega;
     private javax.swing.JLabel error;
     private javax.swing.JButton jButton3;
@@ -747,7 +747,7 @@ public class MaquinaCafe extends javax.swing.JFrame {
     private javax.swing.JProgressBar pbarCafe;
     private javax.swing.JProgressBar pbarLeche;
     private javax.swing.JLabel pedido;
-    private javax.swing.JTextField precio;
+    public javax.swing.JTextField precio;
     private javax.swing.JLabel preparando;
     private javax.swing.JLabel selectIngredientes;
     private javax.swing.JLabel selectProducto;
