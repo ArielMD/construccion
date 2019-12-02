@@ -104,3 +104,6 @@ Sun Dec 01 18:32:22 CST 2019 Café Capuccino $45
 Sun Dec 01 18:32:59 CST 2019 Café Descafeinado $30
 Sun Dec 01 18:33:39 CST 2019 Café Negro $35
 Sun Dec 01 18:35:13 CST 2019 Café Descafeinado $30
+Sun Dec 01 18:38:49 CST 2019 Café Descafeinado $30
+Sun Dec 01 18:39:11 CST 2019 Café Negro $35
+Sun Dec 01 18:40:17 CST 2019 Café Capuccino $45
