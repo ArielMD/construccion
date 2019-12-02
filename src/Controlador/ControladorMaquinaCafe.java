@@ -11,7 +11,6 @@ import Modelo.ClienteCafe;
 import Modelo.FReader;
 import Modelo.Monedero;
 import Vista.MaquinaCafe;
-import completablefuture.Principal;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -225,7 +224,7 @@ public class ControladorMaquinaCafe implements ActionListener {
                 Thread.sleep(2000);
                 System.out.println("Café terminado!(ES)");
             } catch (InterruptedException ex) {
-                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, ex);
             }
         }, executor);
 
@@ -254,7 +253,7 @@ public class ControladorMaquinaCafe implements ActionListener {
                  */
                 System.out.println("Orden terminada!(ES)");
             } catch (InterruptedException ex) {
-                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, ex);
             }
         }, executor);
 
