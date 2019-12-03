@@ -1,0 +1,2 @@
+Tue Dec 03 00:03:18 CST 2019 Nivel de cafe: 90 Nivel de leche: 100 Nivel de Azucar: 95
+Tue Dec 03 00:03:30 CST 2019 Nivel de cafe: 80 Nivel de leche: 100 Nivel de Azucar: 95
