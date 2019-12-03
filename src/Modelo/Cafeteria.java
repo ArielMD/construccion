@@ -14,13 +14,14 @@ import java.util.logging.Logger;
  * @author Ariel May
  */
 public class Cafeteria {
-    
+
     private MaquinaCafe maquina;
+
     public Cafeteria(MaquinaCafe maquina) {
         this.maquina = maquina;
     }
-    
-    public void seleccionProductos(){
+
+    public void seleccionProductos() {
         maquina.getAzucar().setEnabled(false);
         maquina.getLeche().setEnabled(false);
         maquina.getTgbNegro().setEnabled(false);
@@ -40,9 +41,10 @@ public class Cafeteria {
         maquina.getjbtRellenarIng().setVisible(false);
         maquina.getError().setVisible(false);
         maquina.getMenu().getMenu(0).getItem(0).setEnabled(true);
+        maquina.getCancelar().setVisible(false);
     }
-    
-    public void seleccionIngredientes(){
+
+    public void seleccionIngredientes() {
         maquina.getSelectIngredientes().setEnabled(true);
         maquina.getTgbNegro().setEnabled(false);
         maquina.getTgbCapuccino().setEnabled(false);
@@ -52,17 +54,20 @@ public class Cafeteria {
         maquina.getLeche().setEnabled(true);
         maquina.getJbtAceptar().setVisible(true);
         maquina.getMenu().getMenu(0).getItem(0).setEnabled(false);
+        maquina.getCancelar().setVisible(true);
+
     }
-    
+
     public void preparacion() {
         maquina.getPreparando().setEnabled(true);
         maquina.getJbtAceptar().setVisible(false);
         maquina.getAzucar().setEnabled(false);
         maquina.getLeche().setEnabled(false);
+        maquina.getCancelar().setVisible(false);
 
     }
-    
-    public void entrega(){
+
+    public void entrega() {
         maquina.getEntrega().setEnabled(true);
         maquina.getJbtNuevaCompra().setVisible(true);
         maquina.getJbtUno().setEnabled(false);
@@ -71,14 +76,14 @@ public class Cafeteria {
         maquina.getJbtVeinte().setEnabled(false);
         maquina.getJbtCincuenta().setEnabled(false);
     }
-    
-    public void SinIngredientes(){
+
+    public void SinIngredientes() {
         maquina.getjbtRellenarIng().setVisible(true);
         maquina.getError().setVisible(true);
         maquina.getJbtNuevaCompra().setVisible(false);
     }
-    
-    public void bloqueado(){
+
+    public void bloqueado() {
         maquina.getJbtUno().setEnabled(false);
         maquina.getJbtCinco().setEnabled(false);
         maquina.getJbtDiez().setEnabled(false);
