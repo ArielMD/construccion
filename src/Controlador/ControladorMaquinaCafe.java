@@ -72,7 +72,11 @@ public class ControladorMaquinaCafe implements ActionListener {
         this.fReader = new FReader();
         this.llenarIngredientes();
         fReader.crearArchivo("Bitacora");
+        
+        fReader.crearArchivo("BitacoraIngredientes");
 
+        fReader.crearArchivo("BitacoraClientes");
+        
         denominaciones = Arrays.asList(50, 20, 10, 5, 1);
 
         almacen = 100;
@@ -243,6 +247,7 @@ public class ControladorMaquinaCafe implements ActionListener {
                 String bitacora = new Date().toString() + " "
                         + this.maquina.getPedido().getText() + " $"
                         + this.maquina.getPrecio().getText() + "\n";
+                
                 try {
                     this.fReader.escribirArchivo(bitacora, "Bitacora");
                 } catch (IOException ex) {
@@ -253,6 +258,14 @@ public class ControladorMaquinaCafe implements ActionListener {
                 int precio = Integer.parseInt(this.maquina.precio.getText());
                 int monto = Integer.parseInt(this.maquina.dineroIngresado.getText());
                 almacen += monto;
+                String bitacoraIngredientes = new Date().toString() + " Nivel de cafe: "+this.cliente.getNivelCafe()+" Nivel de leche: "+this.cliente.getNivelLeche()+" Nivel de Azucar: "+this.cliente.getNivelAzucar()+"\n";
+                String bitacoraCliente = new Date().toString() + " Dinero ingresado por cliente $"+this.maquina.dineroIngresado.getText() + " Cambio $"+(monto-precio)+"\n";
+                try {
+                    this.fReader.escribirArchivo(bitacoraIngredientes,"BitacoraIngredientes");
+                    this.fReader.escribirArchivo(bitacoraCliente, "BitacoraClientes");
+                } catch (IOException ex) {
+                    Logger.getLogger(ControladorMaquinaCafe.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 String mensajeCambio = this.monedero.darCambio(precio, monto, almacen, denominaciones);
                 almacen -= precio;
                 String despuesCambio = "Hay en almacen despues de dar" + almacen;
