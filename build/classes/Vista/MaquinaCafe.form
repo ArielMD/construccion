@@ -161,6 +161,11 @@
                           </Group>
                           <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                       </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="445" max="-2" attributes="0"/>
+                          <Component id="jbtnCancelar" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                      </Group>
                   </Group>
               </Group>
               <Group type="102" alignment="0" attributes="0">
@@ -276,7 +281,10 @@
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="178" max="-2" attributes="0"/>
-                          <Component id="jbtAceptar" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jbtAceptar" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jbtnCancelar" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                   </Group>
                   <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
@@ -531,6 +539,11 @@
               <Color blue="0" green="0" red="ff" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Error: Sin Ingredientes"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="jbtnCancelar">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Cancelar"/>
           </Properties>
         </Component>
       </SubComponents>
