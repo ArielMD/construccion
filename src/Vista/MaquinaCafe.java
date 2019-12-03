@@ -153,7 +153,9 @@ public class MaquinaCafe extends javax.swing.JFrame {
         return error;
     }
     
-    
+    public JButton getCancelar(){
+        return jbtnCancelar;
+    }
     
     public void configBotonImagen(){
         cafe.setEnabled(false);
@@ -274,6 +276,7 @@ public class MaquinaCafe extends javax.swing.JFrame {
         jbtNuevaCompra = new javax.swing.JButton();
         jbtRellenarIng = new javax.swing.JButton();
         error = new javax.swing.JLabel();
+        jbtnCancelar = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         jbtCincuenta = new javax.swing.JButton();
@@ -373,6 +376,8 @@ public class MaquinaCafe extends javax.swing.JFrame {
         error.setForeground(new java.awt.Color(255, 0, 0));
         error.setText("Error: Sin Ingredientes");
 
+        jbtnCancelar.setText("Cancelar");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -437,7 +442,11 @@ public class MaquinaCafe extends javax.swing.JFrame {
                             .addComponent(pbarAzucar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1)
                             .addComponent(pbarCafe, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(19, 19, 19))))
+                        .addGap(19, 19, 19))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(445, 445, 445)
+                        .addComponent(jbtnCancelar)
+                        .addContainerGap())))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -523,7 +532,9 @@ public class MaquinaCafe extends javax.swing.JFrame {
                                 .addComponent(jLabel12))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(178, 178, 178)
-                        .addComponent(jbtAceptar)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jbtAceptar)
+                            .addComponent(jbtnCancelar))))
                 .addGap(8, 8, 8)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
@@ -741,6 +752,7 @@ public class MaquinaCafe extends javax.swing.JFrame {
     private javax.swing.JButton jbtRellenarIng;
     private javax.swing.JButton jbtUno;
     private javax.swing.JButton jbtVeinte;
+    private javax.swing.JButton jbtnCancelar;
     private javax.swing.JButton leche;
     private javax.swing.JMenuBar menu;
     private javax.swing.JProgressBar pbarAzucar;
