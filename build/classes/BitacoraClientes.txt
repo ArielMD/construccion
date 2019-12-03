@@ -1,0 +1,2 @@
+Tue Dec 03 00:03:18 CST 2019 Dinero ingresado por cliente $40 Cambio $10
+Tue Dec 03 00:03:30 CST 2019 Dinero ingresado por cliente $100 Cambio $65
