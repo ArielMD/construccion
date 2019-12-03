@@ -37,5 +37,10 @@ public class CafeteriaFSM {
     public void error() {
         estadoActual.error(this);
     }
-
+    
+    public void reinicarEstado(){
+        System.out.println("Estado Seleccion Productos");
+        device.seleccionProductos();
+        estadoActual = new EstSeleccionProductos();
+    }
 }
