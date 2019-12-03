@@ -50,6 +50,7 @@ public class ControladorMaquinaCafe implements ActionListener {
         this.maquina.getJbtVeinte().addActionListener(this);
         this.maquina.getJbtCincuenta().addActionListener(this);
         this.maquina.getJbtAceptar().addActionListener(this);
+        this.maquina.getCancelar().addActionListener(this);
         this.maquina.getTgbCapuccino().addActionListener(this);
         this.maquina.getTgbNegro().addActionListener(this);
         this.maquina.getTgbDescafeinado().addActionListener(this);
@@ -192,6 +193,12 @@ public class ControladorMaquinaCafe implements ActionListener {
         if (this.maquina.getMenu().getMenu(0).getItem(0) == e.getSource()) {
             this.fsm.error();
         }
+        if (this.maquina.getCancelar() == e.getSource()) {
+            this.fsm.reinicarEstado();
+            JOptionPane.showMessageDialog(null, "Tu cambio es " + this.maquina.dineroIngresado.getText());
+            this.maquina.getDineroIngresado().setText("0");
+            this.maquina.getPrecio().setText("0");
+        }
     }
 
     public void activarProductos() {
@@ -247,16 +254,16 @@ public class ControladorMaquinaCafe implements ActionListener {
                 int monto = Integer.parseInt(this.maquina.dineroIngresado.getText());
                 almacen += monto;
                 String mensajeCambio = this.monedero.darCambio(precio, monto, almacen, denominaciones);
-                almacen-=precio;
+                almacen -= precio;
                 String despuesCambio = "Hay en almacen despues de dar" + almacen;
                 System.out.println(despuesCambio);
-                JOptionPane.showMessageDialog(null,mensajeCambio,"Gracias Por su compra",JOptionPane.NO_OPTION);
+                JOptionPane.showMessageDialog(null, mensajeCambio, "Gracias Por su compra", JOptionPane.NO_OPTION);
                 /*
                 Es reemplazado en la funcion vaciar campos
                 this.monedero.iniciarDineroIngresado();
                 this.maquina.getDineroIngresado().setText(monedero.getIngresado().toString());
                 this.maquina.getPrecio().setText("0");
-                         */
+                 */
                 System.out.println("Orden terminada!(ES)");
             } catch (InterruptedException ex) {
                 Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, ex);
