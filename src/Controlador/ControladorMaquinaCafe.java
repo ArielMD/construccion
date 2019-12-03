@@ -242,15 +242,21 @@ public class ControladorMaquinaCafe implements ActionListener {
                     Logger.getLogger(ControladorMaquinaCafe.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
-                JOptionPane.showMessageDialog(null, "Gracias por su compra");
                 //Aqui va los metodos para dar cambio y agregar el dinero al monedero.
-                cambio();
+                int precio = Integer.parseInt(this.maquina.precio.getText());
+                int monto = Integer.parseInt(this.maquina.dineroIngresado.getText());
+                almacen += monto;
+                String mensajeCambio = this.monedero.darCambio(precio, monto, almacen, denominaciones);
+                almacen-=precio;
+                String despuesCambio = "Hay en almacen despues de dar" + almacen;
+                System.out.println(despuesCambio);
+                JOptionPane.showMessageDialog(null,mensajeCambio,"Gracias Por su compra",JOptionPane.NO_OPTION);
                 /*
                 Es reemplazado en la funcion vaciar campos
                 this.monedero.iniciarDineroIngresado();
                 this.maquina.getDineroIngresado().setText(monedero.getIngresado().toString());
                 this.maquina.getPrecio().setText("0");
-                 */
+                         */
                 System.out.println("Orden terminada!(ES)");
             } catch (InterruptedException ex) {
                 Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, ex);
@@ -316,8 +322,8 @@ public class ControladorMaquinaCafe implements ActionListener {
         this.maquina.getDineroIngresado().setText("0");
         this.maquina.getPrecio().setText("0");
     }
-    
-    public void iniciarIngresado(){
+
+    public void iniciarIngresado() {
         this.monedero.iniciarDineroIngresado();
     }
 }
